@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class CameraScript : MonoBehaviour {
 
+// m.roppy
+
 	public Material chosenObject;
 	private Material prevMaterial;
 	private GameObject prevGobj;
