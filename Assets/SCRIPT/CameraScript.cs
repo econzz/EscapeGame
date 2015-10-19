@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CameraScript : MonoBehaviour {
 
-// m.roppy
+// meganeroppy
 
 	public Material chosenObject;
 	private Material prevMaterial;
