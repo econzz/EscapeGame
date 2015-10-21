@@ -10,8 +10,8 @@ public static class ConstantScript
 	public const int CAMERA_LAYER = 8;
 	public const int GOAL_LAYER = 9;
 
-	public const float LOOK_LENGTH = 4.0f;
-	public const float LOOK_DELAY = 1.0f;
+	public const float LOOK_LENGTH = 2.0f;
+	public const float LOOK_DELAY = 0.5f;
 
 	public const string SCENE_INGAME = "Main";
 }

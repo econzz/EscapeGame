@@ -25,19 +25,18 @@ public class GameSceneHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (gameFlag == GAME_STATUS.PLAYING) {
-			float deltaTime = Time.deltaTime;
 			if (isDemo) {
 				if (Input.GetKey (KeyCode.UpArrow)) {
-					this.currentCamera.MoveUp(ConstantScript.CAMERA_SPEED, deltaTime);
+					this.currentCamera.MoveUp(ConstantScript.CAMERA_SPEED);
 				}
 				else if (Input.GetKey (KeyCode.DownArrow)) {
-					this.currentCamera.MoveDown(ConstantScript.CAMERA_SPEED, deltaTime);
+					this.currentCamera.MoveDown(ConstantScript.CAMERA_SPEED);
 				}
 				else if (Input.GetKey (KeyCode.RightArrow)) {
-					this.currentCamera.MoveRight(ConstantScript.CAMERA_SPEED, deltaTime);
+					this.currentCamera.MoveRight(ConstantScript.CAMERA_SPEED);
 				}
 				else if (Input.GetKey (KeyCode.LeftArrow)) {
-					this.currentCamera.MoveLeft(ConstantScript.CAMERA_SPEED, deltaTime);
+					this.currentCamera.MoveLeft(ConstantScript.CAMERA_SPEED);
 				}
 
 			}

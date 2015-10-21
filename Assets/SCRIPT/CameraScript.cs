@@ -12,6 +12,7 @@ public class CameraScript : MonoBehaviour {
 
 	private float timerTemp;
 	public Text countDown;
+	public Camera m_camera;
 
 
 	// Use this for initialization
@@ -22,7 +23,7 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		RaycastHit hit;
-		Ray ray = GetComponent<Camera> ().ViewportPointToRay (new Vector3 (0.5f,0.5f,0.0f));
+		Ray ray = m_camera.ViewportPointToRay (new Vector3 (0.5f,0.5f,0.0f));
 		
 		if (Physics.Raycast (ray, out hit)) {
 			Transform objectHit = hit.transform;
@@ -38,21 +39,25 @@ public class CameraScript : MonoBehaviour {
 				hit.transform.gameObject.GetComponent<Renderer> ().material = chosenObject;
 				this.prevGobj = hit.transform.gameObject;
 
-
-
-				this.timerTemp+=Time.deltaTime;
+				this.timerTemp += Time.deltaTime;
 
 				if(this.timerTemp >= ConstantScript.LOOK_DELAY){
 					countDown.gameObject.SetActive(true);
-					countDown.text = ""+(this.timerTemp-ConstantScript.LOOK_DELAY);
+					countDown.text = ""+(this.timerTemp - ConstantScript.LOOK_DELAY);
 				}
 
-				if(this.timerTemp >= (ConstantScript.LOOK_LENGTH+ConstantScript.LOOK_DELAY)){
+				if(this.timerTemp >= (ConstantScript.LOOK_LENGTH + ConstantScript.LOOK_DELAY)){
 					this.timerTemp = 0.0f;
 					countDown.gameObject.SetActive(false);
 					countDown.text = "0.0";
 					this.Jump(hit.transform.gameObject);
 				}
+			}else{ 
+			// watch something not a camera
+				this.timerTemp = 0.0f;
+				countDown.gameObject.SetActive(false);
+				countDown.text = "0.0";
+				this.Jump(hit.transform.gameObject);
 			}
 
 			
@@ -82,9 +87,9 @@ public class CameraScript : MonoBehaviour {
 	public void Jump(GameObject target){
 		if (target) {
 			if(target.layer == ConstantScript.CAMERA_LAYER){
-				Transform temp = target.transform.GetChild(0);
+			//	Transform temp = target.transform.GetChild(0);
 				this.transform.position = target.transform.position;
-				this.transform.rotation = temp.rotation;
+				//this.transform.rotation = temp.rotation;
 			}
 			else if(target.layer == ConstantScript.GOAL_LAYER){
 				GameSceneHandler.gameFlag = GameSceneHandler.GAME_STATUS.GAME_OVER;
@@ -93,19 +98,19 @@ public class CameraScript : MonoBehaviour {
 		}
 	}
 
-	public void MoveUp(float speed, float deltaTime){
-		this.transform.Rotate(Vector3.left * speed * deltaTime);
+	public void MoveUp(float speed){
+		this.transform.Rotate(Vector3.left * speed * Time.deltaTime);
 	}
 
-	public void MoveDown(float speed, float deltaTime){
-		this.transform.Rotate(Vector3.right * speed * deltaTime);
+	public void MoveDown(float speed){
+		this.transform.Rotate(Vector3.right * speed * Time.deltaTime);
 	}
 
-	public void MoveLeft(float speed, float deltaTime){
-		this.transform.Rotate(Vector3.down * speed * deltaTime);
+	public void MoveLeft(float speed){
+		this.transform.Rotate(Vector3.down * speed * Time.deltaTime);
 	}
 
-	public void MoveRight(float speed, float deltaTime){
-		this.transform.Rotate(Vector3.up * speed * deltaTime);
+	public void MoveRight(float speed){
+		this.transform.Rotate(Vector3.up * speed * Time.deltaTime);
 	}
 }
